@@ -5,6 +5,20 @@ velocity(v)
 acceleration(a)
 position(p)
 p = v * t
+
+Points and Vectors
+x and y coordinate. Origin is upper left corner (0,0)
+
+position and velocity changing with time:
+p(t)
+v(t)
+p(t+1)=p(t)+(1)*(v(t))
+p[0] = p[0]+v[0]
+p[1] = p[1]+v[1]
+
+Adding a vector to a points results in a new point.
+Subtracting two points results in a vector
+
 '''
 
 # Ball motion with an explicit timer
