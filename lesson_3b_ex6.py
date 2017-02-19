@@ -11,11 +11,12 @@ ticks = 0
 width = 400
 height = 400
 first_time = True
+first_try = True
 stopwatch = '00:00.0'
 points = 0
 misses = 0
 d = 0
-score = '0/0'
+score = 'Points(0)/Misses(0)'
 
 # define helper function format that converts time
 # in tenths of seconds into formatted string A:BC.D
@@ -38,21 +39,28 @@ def format(t):
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start():
 	global first_time
+	global first_try
 	if first_time:
 		timer.start()
 		first_time = False
+		first_try = True
 
 def stop():
 	timer.stop()
+	global first_try
 	global first_time
 	first_time = True
 	global points
 	global misses
 	global score
-	if d ==0:
-		points+=1
-	else:
-		misses+=1
+	if first_try:
+		if d ==0:
+			points+=1
+			first_try = False
+		else:
+			misses+=1
+			first_try = False
+	
 	score = 'Points(%d)/Misses(%d)' % (points,misses) 
 
 
@@ -61,11 +69,14 @@ def restart():
 	global first_time
 	global points
 	global misses
+	global score
 	timer.stop()
 	first_time = True
 	ticks = 0
 	points = 0
 	misses = 0
+	score = 'Points(0)/Misses(0)'
+
 	format(ticks)
 
 
@@ -79,7 +90,7 @@ def timer_handle():
 # define draw handler
 def draw_handler(canvas):
 	canvas.draw_text(stopwatch,[height/2, width/2],30,'Yellow')
-	canvas.draw_text(score, [300,20],20,'Red')
+	canvas.draw_text(score, [100,40],20,'Red')
 
     
 # create frame
