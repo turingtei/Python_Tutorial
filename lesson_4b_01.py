@@ -1,4 +1,5 @@
 # control the position of a ball using the arrow keys
+'''Positional control'''
 
 try:
     import simplegui
@@ -11,21 +12,25 @@ HEIGHT = 400
 BALL_RADIUS = 20
 
 ball_pos = [WIDTH / 2, HEIGHT / 2]
+v = [0,0]       #velocity control
 
 # define event handlers
 def draw(canvas):
+    ball_pos[0]+=v[0]
+    ball_pos[1]+=v[1]
+
     canvas.draw_circle(ball_pos, BALL_RADIUS, 2, "Red", "White")
 
 def keydown(key):
-    vel = 4
+    acc = 4
     if key == simplegui.KEY_MAP["left"]:
-        ball_pos[0] -= vel
+        v[0] -= acc
     elif key == simplegui.KEY_MAP["right"]:
-        ball_pos[0] += vel
+        v[0] += acc
     elif key == simplegui.KEY_MAP["down"]:
-        ball_pos[1] += vel
+        v[1] += acc
     elif key == simplegui.KEY_MAP["up"]:
-        ball_pos[1] -= vel        
+        v[1] -= acc        
     
 # create frame 
 frame = simplegui.create_frame("Positional ball control", WIDTH, HEIGHT)
