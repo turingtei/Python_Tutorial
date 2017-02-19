@@ -7,7 +7,6 @@ Hint: Add a global variable to a timer callback, and start a timer. '''
 
 ###################################################
 # Student should add code where relevant to the following.
-
 try:
     import simplegui
 except:
@@ -17,11 +16,13 @@ counter = 0
 
 # Timer handler
 def tick():
-    print counter
-    counter += 1
+  global counter
+  print (counter)
+  counter += 1
 
 # create timer
 timer = simplegui.create_timer(1000, tick)
+timer.start()
 
 
 
