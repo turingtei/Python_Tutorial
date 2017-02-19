@@ -1,15 +1,5 @@
 # template for "Stopwatch: The Game"
-'''Construct a timer with an associated interval of 
-0.1 seconds whose event handler increments a global integer.
-(Remember that 𝚌𝚛𝚎𝚊𝚝𝚎_𝚝𝚒𝚖𝚎𝚛 takes the interval specified in milliseconds.)
-This integer will keep track of the time in tenths of seconds.
-Test your timer by printing this global integer to the console.
-Use the CodeSkulptor reset button in the blue menu bar to terminate
-your program and stop the timer and its print statements.
-Important: Do not use floating point numbers to keep track of
-tenths of a second! While it's certainly possible to get it working,
-the imprecision of floating point can make your life miserable.
-Use an integer instead, i.e., 12 represents 1.2 seconds.'''
+
 
 # define global variables
 try:
@@ -18,6 +8,9 @@ except:
     import simpleguitk as simplegui
 
 ticks = 0
+width = 400
+height = 400
+first_time = True
 
 # define helper function format that converts time
 # in tenths of seconds into formatted string A:BC.D
@@ -26,12 +19,19 @@ def format(t):
     
 # define event handlers for buttons; "Start", "Stop", "Reset"
 def start():
-	timer.start()
+	global first_time
+	if first_time:
+		timer.start()
+		first_time = False
+
 def stop():
 	timer.stop()
+
 def restart():
 	global ticks
+	global first_time
 	timer.stop()
+	first_time = True
 	ticks = 0
 
 
@@ -42,10 +42,13 @@ def timer_handle():
 
 
 # define draw handler
+def draw_handler(canvas):
+	canvas.draw_text(str(ticks),[height/2, width/2],30,'Yellow')
 
     
 # create frame
-frame = simplegui.create_frame("Stopwatch",400,400)
+frame = simplegui.create_frame("Stopwatch",width,height)
+frame.set_draw_handler(draw_handler)
 timer = simplegui.create_timer(10,timer_handle)
 start = frame.add_button("Start",start)
 stop = frame.add_button("Stop", stop)
