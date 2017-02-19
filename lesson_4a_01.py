@@ -25,7 +25,7 @@ def draw(c):
     # the printable character via ord(), this example now restricts
     # keys to alphanumerics
     
-    if current_key in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789":
+    if current_key in "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz":
         c.draw_text(current_key, [10, 25], 20, "Red")    
         
 # create frame             
