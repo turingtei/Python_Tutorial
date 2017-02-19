@@ -5,7 +5,10 @@
 # each having their own start and stop buttons.
 # Find and correct the error in the code below.
 
-import simplegui
+try:
+    import simplegui
+except:
+    import simpleguitk as simplegui
 
 # Initialize two counters.
 counter1 = [0, 0]
