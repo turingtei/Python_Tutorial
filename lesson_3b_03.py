@@ -23,8 +23,9 @@ def decr_button_handler():
     # Insert check that size > 1, to make sure it stays positive
     # NOTE that this restriction has changed from the video
     # since draw_circle now throws an error if radius is zero
-    size -= 1
-    label.set_text("Value: " + str(size))
+    if size >0:
+        size -= 1
+        label.set_text("Value: " + str(size))
 
 def change_circle_handler():
     """Change the circle radius."""
