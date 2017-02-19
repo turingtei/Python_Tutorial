@@ -2,7 +2,7 @@ try:
     import simplegui
 except:
     import simpleguitk as simplegui
-
+'''
 #####################
 # Buggy code -- doesn't start frame
 
@@ -23,7 +23,7 @@ frame = simplegui.create_frame("Home", 300, 200)
 frame.add_button("Click me", click)
 frame.set_draw_handler(draw)
 frame.start()
-
+'''
 
 #####################
 # Buggy code -- doesn't start timers
@@ -34,5 +34,7 @@ def timer1_handler():
 def timer2_handler():
     print ("2")
 
-simplegui.create_timer(100, timer1_handler)
-simplegui.create_timer(300, timer2_handler)
+timer1 = simplegui.create_timer(100, timer1_handler)
+timer2 = simplegui.create_timer(300, timer2_handler)
+timer1.start()
+timer2.start()
