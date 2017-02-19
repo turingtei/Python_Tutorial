@@ -16,8 +16,16 @@ v = [0,0]       #velocity control
 
 # define event handlers
 def draw(canvas):
-    ball_pos[0]+=v[0]
-    ball_pos[1]+=v[1]
+    ball_pos[0] += v[0]
+    if ball_pos[0] < BALL_RADIUS:
+        v[0] = -v[0]
+    elif ball_pos[0] > (WIDTH-BALL_RADIUS):
+        v[0] = -v[0]
+    ball_pos[1] += v[1]
+    if ball_pos[1] < BALL_RADIUS:
+        v[1] = -v[1]
+    elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
+        v[1] = -v[1]
 
     canvas.draw_circle(ball_pos, BALL_RADIUS, 2, "Red", "White")
 
