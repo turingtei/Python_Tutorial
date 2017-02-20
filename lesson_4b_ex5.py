@@ -26,8 +26,8 @@ ball_vel = [0,0]
 def spawn_ball():
     global ball_pos, ball_vel # these are vectors stored as list
     
-    ball_vel = [1,2]
-    print(ball_pos)
+    ball_vel = [random.randrange(120/60.,240/60.),random.randrange(60/60.,180/60.)]
+    print (ball_pos)
     print(ball_vel)
     #ball_vel = [random.randrange(-3,3),random.randrange(-3,3)]
 
