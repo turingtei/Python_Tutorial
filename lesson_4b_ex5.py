@@ -18,12 +18,12 @@ HALF_PAD_HEIGHT = PAD_HEIGHT / 2
 LEFT = False
 RIGHT = True
 ball_pos = [WIDTH/2,HEIGHT/2]
-ball_vel = [1,2]
+ball_vel = [0,0]
 
 
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
-def spawn_ball(direction):
+def spawn_ball():
     global ball_pos, ball_vel # these are vectors stored as list
     
     ball_vel = [1,2]
@@ -35,8 +35,9 @@ def spawn_ball(direction):
 # define event handlers
 def new_game():
     global paddle1_pos, paddle2_pos, paddle1_vel, paddle2_vel  # these are numbers
-    global score1, score2  # these are ints
-    spawn_ball([1,2])
+    global score1, score2
+    print ('in new_game')  # these are ints
+    spawn_ball()
 
 def draw(canvas):
     global score1, score2, paddle1_pos, paddle2_pos, ball_pos, ball_vel
@@ -84,8 +85,9 @@ frame = simplegui.create_frame("Pong", WIDTH, HEIGHT)
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
 frame.set_keyup_handler(keyup)
-frame.start()
+
 new_game()
+frame.start()
 print ('status: frame.start()')
 
 
