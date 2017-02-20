@@ -38,14 +38,24 @@ def keydown(key):
     elif key == simplegui.KEY_MAP["down"]:
         v[1] += acc
     elif key == simplegui.KEY_MAP["up"]:
-        v[1] -= acc        
-    
+        v[1] -= acc
+
+def keyup(key):
+    if key == simplegui.KEY_MAP["left"]:
+        v[0] = 0
+    elif key == simplegui.KEY_MAP["right"]:
+        v[0] = 0
+    elif key == simplegui.KEY_MAP["down"]:
+        v[1] = 0
+    elif key == simplegui.KEY_MAP["up"]:
+        v[1] = 0
 # create frame 
 frame = simplegui.create_frame("Positional ball control", WIDTH, HEIGHT)
 
 # register event handlers
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
+frame.set_keyup_handler(keyup)
 
 # start frame
 frame.start()
