@@ -18,20 +18,25 @@ HALF_PAD_HEIGHT = PAD_HEIGHT / 2
 LEFT = False
 RIGHT = True
 ball_pos = [WIDTH/2,HEIGHT/2]
-ball_vel = [0,0]
+ball_vel = [1,2]
 
 
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
 def spawn_ball(direction):
-    global ball_pos, ball_vel # these are vectors stored as lists
-    ball_vel = [random.randrange(-3,3),random.randrange(-3,3)]
+    global ball_pos, ball_vel # these are vectors stored as list
+    
+    ball_vel = [1,2]
+    print(ball_pos)
+    print(ball_vel)
+    #ball_vel = [random.randrange(-3,3),random.randrange(-3,3)]
 
 
 # define event handlers
 def new_game():
     global paddle1_pos, paddle2_pos, paddle1_vel, paddle2_vel  # these are numbers
     global score1, score2  # these are ints
+    spawn_ball([1,2])
 
 def draw(canvas):
     global score1, score2, paddle1_pos, paddle2_pos, ball_pos, ball_vel
@@ -42,8 +47,8 @@ def draw(canvas):
     canvas.draw_line([PAD_WIDTH, 0],[PAD_WIDTH, HEIGHT], 1, "White")
     canvas.draw_line([WIDTH - PAD_WIDTH, 0],[WIDTH - PAD_WIDTH, HEIGHT], 1, "White")
     
-    canvas.draw_polygon([[0, HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [0, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Yellow', 'Yellow')
-    canvas.draw_polygon([[WIDTH - PAD_WIDTH, HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
+    #canvas.draw_polygon([[0, HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [0, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Yellow', 'Yellow')
+    #canvas.draw_polygon([[WIDTH - PAD_WIDTH, HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
 
     # update ball
     ball_pos[0] += ball_vel[0]
@@ -63,8 +68,6 @@ def draw(canvas):
     # update paddle's vertical position, keep paddle on the screen
     
     # draw paddles
-
-    
     # determine whether paddle and ball collide    
     
     # draw scores
@@ -81,8 +84,11 @@ frame = simplegui.create_frame("Pong", WIDTH, HEIGHT)
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
 frame.set_keyup_handler(keyup)
+frame.start()
+new_game()
+print ('status: frame.start()')
 
 
 # start frame
-new_game()
-frame.start()
+#new_game()
+#frame.start()
