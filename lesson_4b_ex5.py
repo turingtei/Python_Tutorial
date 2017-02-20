@@ -23,12 +23,13 @@ ball_vel = [0,0]
 
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
-def spawn_ball():
+def spawn_ball(direction):
     global ball_pos, ball_vel # these are vectors stored as list
-    
-    ball_vel = [random.randrange(120/60.,240/60.),random.randrange(60/60.,180/60.)]
-    print (ball_pos)
-    print(ball_vel)
+    if direction == LEFT:
+        ball_vel = [random.randrange(-4,-1),random.randrange(-3,-1)]
+    if direction == RIGHT:
+        ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
+        print(ball_vel)
     #ball_vel = [random.randrange(-3,3),random.randrange(-3,3)]
 
 
@@ -37,7 +38,8 @@ def new_game():
     global paddle1_pos, paddle2_pos, paddle1_vel, paddle2_vel  # these are numbers
     global score1, score2
     print ('in new_game')  # these are ints
-    spawn_ball()
+
+    spawn_ball(LEFT)
 
 def draw(canvas):
     global score1, score2, paddle1_pos, paddle2_pos, ball_pos, ball_vel
@@ -53,6 +55,22 @@ def draw(canvas):
 
     # update ball
     ball_pos[0] += ball_vel[0]
+    if ball_pos[0] < BALL_RADIUS+PAD_WIDTH:
+        ball_pos=[WIDTH/2,HEIGHT/2]
+        ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
+        
+    elif ball_pos[0] > (WIDTH-BALL_RADIUS-PAD_WIDTH):
+        ball_pos=[WIDTH/2,HEIGHT/2]
+        ball_pos=[WIDTH/2,HEIGHT/2]
+        ball_vel = [random.randrange(-4,-1),random.randrange(-3,-1)]
+        
+    ball_pos[1] += ball_vel[1]
+    if ball_pos[1] < BALL_RADIUS:
+        ball_vel[1] = -ball_vel[1]
+    elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
+        ball_vel[1] = -ball_vel[1]
+    '''
+    ball_pos[0] += ball_vel[0]
     if ball_pos[0] < BALL_RADIUS:
         ball_vel[0] = -ball_vel[0]
     elif ball_pos[0] > (WIDTH-BALL_RADIUS):
@@ -62,7 +80,8 @@ def draw(canvas):
         ball_vel[1] = -ball_vel[1]
     elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
         ball_vel[1] = -ball_vel[1]
-            
+    '''
+
     # draw ball
     canvas.draw_circle(ball_pos,BALL_RADIUS,1,'Red','Red')
     
