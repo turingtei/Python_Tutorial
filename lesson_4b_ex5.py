@@ -25,6 +25,7 @@ ball_vel = [0,0]
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
 def spawn_ball(direction):
     global ball_pos, ball_vel # these are vectors stored as lists
+    ball_vel = [random.randrange(-3,3),random.randrange(-3,3)]
 
 
 # define event handlers
@@ -45,9 +46,19 @@ def draw(canvas):
     canvas.draw_polygon([[WIDTH - PAD_WIDTH, HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
 
     # update ball
+    ball_pos[0] += ball_vel[0]
+    if ball_pos[0] < BALL_RADIUS:
+        ball_vel[0] = -ball_vel[0]
+    elif ball_pos[0] > (WIDTH-BALL_RADIUS):
+        ball_vel[0] = -ball_vel[0]
+    ball_pos[1] += ball_vel[1]
+    if ball_pos[1] < BALL_RADIUS:
+        ball_vel[1] = -ball_vel[1]
+    elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
+        ball_vel[1] = -ball_vel[1]
             
     # draw ball
-    canvas.draw_circle([WIDTH/2,HEIGHT/2],BALL_RADIUS,1,'Red','Red')
+    canvas.draw_circle(ball_pos,BALL_RADIUS,1,'Red','Red')
     
     # update paddle's vertical position, keep paddle on the screen
     
