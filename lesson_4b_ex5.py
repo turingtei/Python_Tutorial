@@ -47,6 +47,7 @@ def draw(canvas):
     # update ball
             
     # draw ball
+    canvas.draw_circle([WIDTH/2,HEIGHT/2],BALL_RADIUS,1,'Red','Red')
     
     # update paddle's vertical position, keep paddle on the screen
     
