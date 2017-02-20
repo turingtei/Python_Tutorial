@@ -1,6 +1,10 @@
 # Implementation of classic arcade game Pong
 
-import simplegui
+try:
+    import simplegui
+except:
+    import simpleguitk as simplegui
+
 import random
 
 # initialize globals - pos and vel encode vertical info for paddles
@@ -13,6 +17,9 @@ HALF_PAD_WIDTH = PAD_WIDTH / 2
 HALF_PAD_HEIGHT = PAD_HEIGHT / 2
 LEFT = False
 RIGHT = True
+ball_pos = [WIDTH/2,HEIGHT/2]
+ball_vel = [0,0]
+
 
 # initialize ball_pos and ball_vel for new bal in middle of table
 # if direction is RIGHT, the ball's velocity is upper right, else upper left
@@ -33,7 +40,10 @@ def draw(canvas):
     canvas.draw_line([WIDTH / 2, 0],[WIDTH / 2, HEIGHT], 1, "White")
     canvas.draw_line([PAD_WIDTH, 0],[PAD_WIDTH, HEIGHT], 1, "White")
     canvas.draw_line([WIDTH - PAD_WIDTH, 0],[WIDTH - PAD_WIDTH, HEIGHT], 1, "White")
-        
+    
+    canvas.draw_polygon([[0, HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [0, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Yellow', 'Yellow')
+    canvas.draw_polygon([[WIDTH - PAD_WIDTH, HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH,HEIGHT/2+HALF_PAD_HEIGHT], [WIDTH, HEIGHT/2-HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, HEIGHT/2-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
+
     # update ball
             
     # draw ball
@@ -41,6 +51,7 @@ def draw(canvas):
     # update paddle's vertical position, keep paddle on the screen
     
     # draw paddles
+
     
     # determine whether paddle and ball collide    
     
