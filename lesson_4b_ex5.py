@@ -59,32 +59,25 @@ def draw(canvas):
 
     # update ball
     ball_pos[0] += ball_vel[0]
+    ball_pos[1] += ball_vel[1]
     if ball_pos[0] < BALL_RADIUS+PAD_WIDTH:
-        ball_pos=[WIDTH/2,HEIGHT/2]
-        ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
+        if (paddle1_pos+HALF_PAD_HEIGHT)>ball_pos[1] and (paddle1_pos-HALF_PAD_HEIGHT)<ball_pos[1]:
+            ball_vel[0] = -ball_vel[0]
+            ball_vel[1] = -ball_vel[1]
+
+        else:
+            ball_pos = [WIDTH/2,HEIGHT/2]
+            ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
         
     elif ball_pos[0] > (WIDTH-BALL_RADIUS-PAD_WIDTH):
         ball_pos=[WIDTH/2,HEIGHT/2]
         ball_pos=[WIDTH/2,HEIGHT/2]
         ball_vel = [random.randrange(-4,-1),random.randrange(-3,-1)]
         
-    ball_pos[1] += ball_vel[1]
     if ball_pos[1] < BALL_RADIUS:
         ball_vel[1] = -ball_vel[1]
     elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
         ball_vel[1] = -ball_vel[1]
-    '''
-    ball_pos[0] += ball_vel[0]
-    if ball_pos[0] < BALL_RADIUS:
-        ball_vel[0] = -ball_vel[0]
-    elif ball_pos[0] > (WIDTH-BALL_RADIUS):
-        ball_vel[0] = -ball_vel[0]
-    ball_pos[1] += ball_vel[1]
-    if ball_pos[1] < BALL_RADIUS:
-        ball_vel[1] = -ball_vel[1]
-    elif ball_pos[1] > (HEIGHT -BALL_RADIUS):
-        ball_vel[1] = -ball_vel[1]
-    '''
 
     # draw ball
     canvas.draw_circle(ball_pos,BALL_RADIUS,1,'Red','Red')
@@ -99,10 +92,11 @@ def draw(canvas):
 
     # draw paddles
     canvas.draw_polygon([[0, paddle1_pos+HALF_PAD_HEIGHT], [PAD_WIDTH,paddle1_pos+HALF_PAD_HEIGHT], [PAD_WIDTH, paddle1_pos-HALF_PAD_HEIGHT], [0, paddle1_pos-HALF_PAD_HEIGHT]], 1, 'Yellow', 'Yellow')
-    #canvas.draw_polygon([[WIDTH, paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH,paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, paddle2_pos-HALF_PAD_HEIGHT], [WIDTH, paddle2_pos-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
+    canvas.draw_polygon([[WIDTH, paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH,paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, paddle2_pos-HALF_PAD_HEIGHT], [WIDTH, paddle2_pos-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
     
-    canvas.draw_circle([WIDTH-PAD_WIDTH,paddle2_pos],50,1,'Red','Red')
-    # determine whether paddle and ball collide    
+    # determine whether paddle and ball collide
+    #if (paddle2_pos+HALF_PAD_HEIGHT)>ball_pos[1] and (paddle2_pos-HALF_PAD_HEIGHT)<ball_pos[1]:
+
     
     # draw scores
         
@@ -114,17 +108,17 @@ def keydown(key):
         paddle2_vel -= acc
     elif key == simplegui.KEY_MAP["down"]:
         paddle2_vel += acc
-    elif key == simplegui.KEY_MAP["o"]:
+    elif key == simplegui.KEY_MAP["w"]:
         paddle1_vel -= acc
-    elif key == simplegui.KEY_MAP["l"]:
+    elif key == simplegui.KEY_MAP["s"]:
         paddle1_vel += acc
 
 
 def keyup(key):
     global paddle1_vel, paddle2_vel
-    if key == simplegui.KEY_MAP["o"]:
+    if key == simplegui.KEY_MAP["w"]:
         paddle1_vel = 0
-    elif key == simplegui.KEY_MAP["l"]:
+    elif key == simplegui.KEY_MAP["s"]:
         paddle1_vel = 0
     elif key == simplegui.KEY_MAP["up"]:
         paddle2_vel = 0
