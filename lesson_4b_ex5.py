@@ -42,9 +42,9 @@ def new_game():
     paddle2_pos = HEIGHT/2
     paddle1_vel = 0
     paddle2_vel = 0
-    print ('in new_game')  # these are ints
 
-    spawn_ball(LEFT)
+
+    spawn_ball(RIGHT)
 
 def draw(canvas):
     global score1, score2, paddle1_pos, paddle2_pos, ball_pos, ball_vel
@@ -91,14 +91,16 @@ def draw(canvas):
     # update paddle's vertical position, keep paddle on the screen
     if ((paddle1_pos + paddle1_vel) >= (HALF_PAD_HEIGHT)) and ((paddle1_pos + paddle1_vel) <= (HEIGHT- HALF_PAD_HEIGHT)):
         paddle1_pos+=paddle1_vel
-    elif ((paddle2_pos + paddle2_vel) >= (HALF_PAD_HEIGHT)) and ((paddle2_pos + paddle2_vel) <= (HEIGHT- HALF_PAD_HEIGHT)):
+
+    if ((paddle2_pos + paddle2_vel) >= (HALF_PAD_HEIGHT)) and ((paddle2_pos + paddle2_vel) <= (HEIGHT- HALF_PAD_HEIGHT)):
         paddle2_pos+=paddle2_vel
     
 
     # draw paddles
     canvas.draw_polygon([[0, paddle1_pos+HALF_PAD_HEIGHT], [PAD_WIDTH,paddle1_pos+HALF_PAD_HEIGHT], [PAD_WIDTH, paddle1_pos-HALF_PAD_HEIGHT], [0, paddle1_pos-HALF_PAD_HEIGHT]], 1, 'Yellow', 'Yellow')
-    canvas.draw_polygon([[WIDTH, paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH,paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, paddle2_pos-HALF_PAD_HEIGHT], [WIDTH, paddle2_pos-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
-
+    #canvas.draw_polygon([[WIDTH, paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH,paddle2_pos+HALF_PAD_HEIGHT], [WIDTH-PAD_WIDTH, paddle2_pos-HALF_PAD_HEIGHT], [WIDTH, paddle2_pos-HALF_PAD_HEIGHT]], 1, 'Blue', 'Blue')
+    
+    canvas.draw_circle([WIDTH-PAD_WIDTH,paddle2_pos],50,1,'Red','Red')
     # determine whether paddle and ball collide    
     
     # draw scores
@@ -107,14 +109,15 @@ def keydown(key):
     global paddle1_vel, paddle2_vel
     acc = 4
 
-    if key == simplegui.KEY_MAP["o"]:
+    if key == simplegui.KEY_MAP["up"]:
+        paddle2_vel -= acc
+    elif key == simplegui.KEY_MAP["down"]:
+        paddle2_vel += acc
+    elif key == simplegui.KEY_MAP["o"]:
         paddle1_vel -= acc
     elif key == simplegui.KEY_MAP["l"]:
         paddle1_vel += acc
-    elif key == simplegui.KEY_MAP["o"]:
-        paddle2_vel -= acc
-    elif key == simplegui.KEY_MAP["l"]:
-        paddle2_vel += acc
+
 
 def keyup(key):
     global paddle1_vel, paddle2_vel
@@ -122,9 +125,9 @@ def keyup(key):
         paddle1_vel = 0
     elif key == simplegui.KEY_MAP["l"]:
         paddle1_vel = 0
-    elif key == simplegui.KEY_MAP["o"]:
+    elif key == simplegui.KEY_MAP["up"]:
         paddle2_vel = 0
-    elif key == simplegui.KEY_MAP["l"]:
+    elif key == simplegui.KEY_MAP["down"]:
         paddle2_vel = 0
 
 
