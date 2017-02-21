@@ -71,6 +71,7 @@ def draw(canvas):
         else:
             ball_pos = [WIDTH/2,HEIGHT/2]
             ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
+            score2+=1
         
     elif ball_pos[0] > (WIDTH - BALL_RADIUS - PAD_WIDTH):
         if (paddle2_pos + HALF_PAD_HEIGHT) > ball_pos[1] and (paddle2_pos - HALF_PAD_HEIGHT) < ball_pos[1]:
@@ -80,6 +81,7 @@ def draw(canvas):
         else:
             ball_pos = [WIDTH / 2,HEIGHT / 2]
             ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
+            score1+=1
         
     if ball_pos[1] < BALL_RADIUS:
         ball_vel[1] = -ball_vel[1]
@@ -104,9 +106,9 @@ def draw(canvas):
     # determine whether paddle and ball collide
     #if (paddle2_pos+HALF_PAD_HEIGHT)>ball_pos[1] and (paddle2_pos-HALF_PAD_HEIGHT)<ball_pos[1]:
 
-    
     # draw scores
-        
+    canvas.draw_text(score1, ((WIDTH / 2) - 40, 50), 40, 'Yellow')
+    canvas.draw_text(score2, ((WIDTH / 2) + 40, 50), 40, 'Blue')    
 def keydown(key):
     global paddle1_vel, paddle2_vel
     acc = 4
