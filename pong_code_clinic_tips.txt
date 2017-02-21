@@ -24,9 +24,8 @@ paddle1_pos += paddle1_vel
 
 Ideally, you'd like to add something like
 
-if (paddle1_pos - paddle1vel) >= HALF_PAD_HEIGHT:
+if paddle1_pos >= HALF_PAD_HEIGHT:
     paddle1_pos += paddle1_vel
-
 The problem with this solution is that the paddle sticks because when the condition in the if becomes 𝚃𝚛𝚞𝚎, the paddle can't move anymore, ever! The trick is to replace 𝚙𝚊𝚍𝚍𝚕𝚎𝟷_𝚙𝚘𝚜 in the condition for the if by 𝚙𝚊𝚍𝚍𝚕𝚎𝟷_𝚙𝚘𝚜 + 𝚙𝚊𝚍𝚍𝚕𝚎𝟷_𝚟𝚎𝚕. Now, this condition check to see if the next movement for the paddle puts it off the edge. If so, the move is disallowed. Now, you can move the paddle back down.
 
 Tip #5 - Keyboard issue in CodeSkulptor
