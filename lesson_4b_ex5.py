@@ -107,8 +107,8 @@ def draw(canvas):
     #if (paddle2_pos+HALF_PAD_HEIGHT)>ball_pos[1] and (paddle2_pos-HALF_PAD_HEIGHT)<ball_pos[1]:
 
     # draw scores
-    canvas.draw_text(score1, ((WIDTH / 2) - 40, 50), 40, 'Yellow')
-    canvas.draw_text(score2, ((WIDTH / 2) + 40, 50), 40, 'Blue')    
+    canvas.draw_text(str(score1), ((WIDTH / 2) - 40, 50), 40, 'Yellow')
+    canvas.draw_text(str(score2), ((WIDTH / 2) + 40, 50), 40, 'Blue')    
 def keydown(key):
     global paddle1_vel, paddle2_vel
     acc = 4
