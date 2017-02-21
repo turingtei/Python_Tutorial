@@ -134,12 +134,16 @@ def keyup(key):
     elif key == simplegui.KEY_MAP["down"]:
         paddle2_vel = 0
 
+def restart():
+    new_game()
+
 
 # create frame
 frame = simplegui.create_frame("Pong", WIDTH, HEIGHT)
 frame.set_draw_handler(draw)
 frame.set_keydown_handler(keydown)
 frame.set_keyup_handler(keyup)
+restartButton = frame.add_button('Restart', restart,100)
 
 new_game()
 frame.start()
