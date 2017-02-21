@@ -70,9 +70,13 @@ def draw(canvas):
             ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
         
     elif ball_pos[0] > (WIDTH-BALL_RADIUS-PAD_WIDTH):
-        ball_pos=[WIDTH/2,HEIGHT/2]
-        ball_pos=[WIDTH/2,HEIGHT/2]
-        ball_vel = [random.randrange(-4,-1),random.randrange(-3,-1)]
+        if (paddle2_pos+HALF_PAD_HEIGHT)>ball_pos[1] and (paddle2_pos-HALF_PAD_HEIGHT)<ball_pos[1]:
+            ball_vel[0] = -ball_vel[0]
+            ball_vel[1] = -ball_vel[1]
+
+        else:
+            ball_pos = [WIDTH/2,HEIGHT/2]
+            ball_vel = [random.randrange(1,4),random.randrange(-3,-1)]
         
     if ball_pos[1] < BALL_RADIUS:
         ball_vel[1] = -ball_vel[1]
