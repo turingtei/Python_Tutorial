@@ -1,4 +1,5 @@
 # Implementation of classic arcade game Pong
+# Play pong
 
 try:
     import simplegui
