@@ -1,12 +1,3 @@
-#Dictionaries
-'''
-mapping key -->>>values
-{1:2,3:4,'a':123}
-{key:value}
-values are arbitraries
- keys can use numbers, strings
-'''
-
 # Cipher
 
 try:
@@ -14,48 +5,54 @@ try:
 except:
     import simpleguitk as simplegui
 
-CIPHER = {'a': 'x', 'b': 'c', 'c': 'r', 'd': 'm', 'e': 'l'}
+import random
 
-message = " "
+CIPHER = {}
+LETTERS = "abcdefghijklmnopqrstuvwxyz"
+
+def init():
+  lettersList = list(LETTERS)
+  random.shuffle(lettersList)
+  for ch in LETTERS:
+    CIPHER[ch] = letterList.pop()
+message = ""
 
 # Encode button
 def encode():
     emsg = ""
     for ch in message:
         emsg += CIPHER[ch]
-    print (message, "encodes to", emsg)
+    #print (message, "encodes to", emsg)
 
 # Decode button
 def decode():
-  dmsg = ""
-  '''
-  for ch in message:
-    for key, value in CIPHER.items():
-      if ch == value:
-        dmsg += key
-'''
-  
-  
-  for ch in message:
-    for key, value in CIPHER.items():
-      if ch == value:
-        dmsg += key
-
-  print (message, "decodes to", dmsg)
+    dmsg = ""
+    for ch in message:
+      for key, value in CIPHER.items():
+        if ch == value:
+          dmsg +=key
+    #pring (message, "decodes to", dmsg)
+    '''
+    for ch in message:
+        for key in CIPHER:
+            if ch == CIPHER[key]:
+                dmsg += key
+    print (message, "decodes to", dmsg)
+    '''
 # Update message input
-
 def newmsg(msg):
-  global message
-  message = msg
-  label.set_text(msg)
+    global message
+    message = msg
+    label.set_text(msg)
     
 # Create a frame and assign callbacks to event handlers
 frame = simplegui.create_frame("Cipher", 2, 200, 200)
 frame.add_input("Message:", newmsg, 200)
-label = frame.add_label(" ", 200)
+label = frame.add_label("", 200)
 frame.add_button("Encode", encode)
 frame.add_button("Decode", decode)
 
+init()
+
 # Start the frame animation
 frame.start()
-
