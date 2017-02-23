@@ -6,6 +6,12 @@ except:
     import simpleguitk as simplegui
 import random
 
+card_width = 50
+card_height = 100
+canvas_width = 800
+center_cards=[]
+
+
 # helper function to initialize globals
 def new_game():
     pass  
@@ -19,7 +25,12 @@ def mouseclick(pos):
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-    pass
+  #center of the cards
+  global center_cards
+  for i in range(25,801,50):
+
+
+
 
 
 # create frame and add a button and labels
