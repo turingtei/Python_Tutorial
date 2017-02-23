@@ -18,7 +18,8 @@ imCenterY = imHeight // 2
   
 # draw handler
 def draw(canvas):
-  canvas.draw_image(image,(imCenterX,imCenterY),(imWidth,imHeight),(imCenterX,imCenterY),(imWidth,imHeight))
+  if imWidth!=0 and imHeight!=0:
+    canvas.draw_image(image,(imCenterX,imCenterY),(imWidth,imHeight),(imCenterX,imCenterY),(imWidth,imHeight))
 
     
 # create frame and register draw handler    
