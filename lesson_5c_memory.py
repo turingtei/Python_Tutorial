@@ -15,17 +15,22 @@ half_height = 100/2
 letter_height = 75
 list_numbers=[]
 letter_center = []
-
-
+exposed = False
+letter_color = "Red"
+clicked = []
+status = 0
+exposed = [False]*16
+cards_index=list(range(0,16,1))
+print (exposed)
 
 # helper function to initialize globals
 def new_game():
-  global list_numbers, center_cards
+  global list_numbers, center_cards, cards
   for i in range(8):
     list_numbers.append(i)
   list_numbers+=list_numbers
   random.shuffle(list_numbers)
-
+  #print (cards_index)
   #print("list_numbers length",len(list_numbers))
 
   for i in range(25,801,50):
@@ -38,19 +43,25 @@ def new_game():
 # define event handlers
 def mouseclick(pos):
   # add game state logic here
-  pass
+  global clicked,exposed
+  clicked.append(pos[0]//50)
+  exposed[pos[0]//50] = True
+
+
+  print (clicked)
+  print (exposed)
     
                         
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
-  pass
-  #center of the cards
+  global exposed, letter_color
 
-  #print (len(center_cards))
-  for j in center_cards:
-    canvas.draw_polygon([[(j[0]-half_width),(j[1]-half_height)], [(j[0]+half_width),(j[1]-half_height)], [(j[0]+half_width),(j[1]+half_height)], [(j[0]-half_width),(j[1]+half_height)]], 1, 'White', 'Blue')
-  for k in range(len(list_numbers)):
-    canvas.draw_text(str(list_numbers[k]),letter_center[k],50,"Red")
+  for j in cards_index:
+    print (j)
+    if exposed[j] == False:
+      canvas.draw_polygon([[(center_cards[j][0]-half_width),(center_cards[j][1]-half_height)], [(center_cards[j][0]+half_width),(center_cards[j][1]-half_height)], [(center_cards[j][0]+half_width),(center_cards[j][1]+half_height)], [(center_cards[j][0]-half_width),(center_cards[j][1]+half_height)]], 1, 'White', 'Blue')      
+    elif exposed[j] == True:
+      canvas.draw_text(str(list_numbers[j]),letter_center[j],50,letter_color)
 
 
 
