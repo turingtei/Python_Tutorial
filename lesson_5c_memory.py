@@ -49,42 +49,36 @@ def new_game():
 def mouseclick(pos):
   # add game state logic here
   global clicked, exposed, state, last, second_to_last,counter
-
-  if state == 0:
-    second_to_last = pos[0]//50
-    exposed[second_to_last] = True
-    counter+=1
-    state = 1
-    
-  elif state ==1:
-    last = pos[0]//50
-    if last !=second_to_last:
-      exposed[last] = True
+  
+  if not exposed[pos[0]//50]:
+    if state == 0:
+      second_to_last = pos[0]//50
+      exposed[second_to_last] = True
       counter+=1
+      state = 1
+    
+    elif state ==1 and pos[0]//50!=second_to_last:
+      last = pos[0] // 50
+      exposed[last] = True
+      counter += 1
       state = 2
 
-  else:
-    if list_numbers[last] == list_numbers[second_to_last]:
-      exposed[last]=True
+    elif state == 2:
+      if list_numbers[last] == list_numbers[second_to_last]:
+        exposed[last]=True
+        exposed[second_to_last]=True
+      else:
+        exposed[last]=False
+        exposed[second_to_last]=False
+    
+      second_to_last = pos[0]//50
       exposed[second_to_last]=True
-    else:
-      exposed[last]=False
-      exposed[second_to_last]=False
+      if second_to_last != last:
+        counter+=1
     
-    second_to_last = pos[0]//50
-    exposed[second_to_last]=True
-    if second_to_last != last:
-      counter+=1
-    
-    state = 1
+      state = 1
   
-    
 
-
-  print (last)
-  print (exposed)
-    
-                        
 # cards are logically 50x100 pixels in size    
 def draw(canvas):
   global exposed, letter_color
