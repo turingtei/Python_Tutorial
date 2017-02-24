@@ -130,8 +130,8 @@ def draw(canvas):
     field.draw(canvas)
     ball.draw(canvas)
 
-#field = RectangularDomain(width, height)
-field = CircularDomain([width/2, height/2], 180)
+field = RectangularDomain(width, height)
+#field = CircularDomain([width/2, height/2], 180)
 ball = Ball(radius, color, field)
         
 frame = simplegui.create_frame("Ball physics", width, height)
